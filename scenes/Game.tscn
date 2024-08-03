@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4gwkgt3baqx2"]
+
+[ext_resource type="Script" path="res://scripts/Game.gd" id="1_abqot"]
+[ext_resource type="PackedScene" uid="uid://b3i7665neq53y" path="res://scenes/player.tscn" id="2_8jg85"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_abqot")
+
+[node name="Player" parent="." instance=ExtResource("2_8jg85")]
+position = Vector2(243, 478)
+stop_delay = 15
