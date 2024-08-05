@@ -9,3 +9,6 @@ script = ExtResource("1_abqot")
 [node name="Player" parent="." instance=ExtResource("2_8jg85")]
 position = Vector2(243, 478)
 stop_delay = 15
+
+[node name="PlatformContainer" type="Node2D" parent="."]
+unique_name_in_owner = true

@@ -7,8 +7,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e3kku"]
 size = Vector2(41, 16)
 
-[sub_resource type="Animation" id="Animation_sr536"]
-resource_name = "fall"
+[sub_resource type="Animation" id="Animation_rm8st"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -46,8 +46,8 @@ tracks/2/keys = {
 "values": [Vector2(0.35, 0.35)]
 }
 
-[sub_resource type="Animation" id="Animation_rm8st"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_sr536"]
+resource_name = "fall"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -132,7 +132,9 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D"]
+collision_mask = 2
 script = ExtResource("1_peqr2")
+gravity = 800.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -46)
@@ -144,6 +146,7 @@ position = Vector2(0.5, -8)
 shape = SubResource("RectangleShape2D_e3kku")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_fhw6i")
 }
