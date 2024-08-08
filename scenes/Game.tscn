@@ -1,14 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4gwkgt3baqx2"]
+[gd_scene load_steps=4 format=3 uid="uid://c4gwkgt3baqx2"]
 
 [ext_resource type="Script" path="res://scripts/Game.gd" id="1_abqot"]
 [ext_resource type="PackedScene" uid="uid://b3i7665neq53y" path="res://scenes/player.tscn" id="2_8jg85"]
+[ext_resource type="PackedScene" uid="uid://b8mhp1v4btnv1" path="res://scenes/level_generator.tscn" id="3_7br67"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_abqot")
 
 [node name="Player" parent="." instance=ExtResource("2_8jg85")]
+unique_name_in_owner = true
 position = Vector2(243, 478)
 stop_delay = 15
 
 [node name="PlatformContainer" type="Node2D" parent="."]
 unique_name_in_owner = true
+
+[node name="LevelGenerator" parent="." instance=ExtResource("3_7br67")]
