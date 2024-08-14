@@ -5,6 +5,7 @@ class_name GameCamera
 @onready var collision_shape_2d: CollisionShape2D = $Destroyer/CollisionShape2D
 
 
+
 var player: Player = null
 var viewport_size: Vector2
 
@@ -12,9 +13,9 @@ func _ready() -> void:
 	viewport_size = get_viewport_rect().size
 	global_position.x = viewport_size.x * 0.5
 	
-	limit_bottom = viewport_size.y
+	limit_bottom = int(viewport_size.y)
 	limit_left = 0
-	limit_right = viewport_size.x
+	limit_right = int(viewport_size.x)
 	
 	destroyer.position.y = viewport_size.y
 	
@@ -29,14 +30,13 @@ func _process(_delta: float) -> void:
 	if player:
 		var limit_distance: = 420.0
 		if limit_bottom > player.global_position.y + limit_distance:
-			limit_bottom = player.global_position.y + limit_distance
+			limit_bottom = int(player.global_position.y + limit_distance)
 	
 	
 	var overlaping_areas = destroyer.get_overlapping_areas()
 	if overlaping_areas.size() > 0:
 		for area in overlaping_areas:
 			if area is Platform:
-				print(area.name)
 				area.call_deferred("queue_free")
 
 func _physics_process(_delta: float) -> void:
