@@ -47,13 +47,13 @@ func generate_ground():
 func create_platform(location: Vector2) -> Platform:
 	var platform = platform_scene.instantiate()
 	platform.global_position = location
-	platform_container.add_child(platform)
+	platform_container.call_deferred("add_child", platform)
 	return platform
 
 
 func generate_level(start_y: float, should_generate_ground: bool = false):
 	if should_generate_ground:
-		generate_ground()
+		call_deferred("generate_ground")
 	
 	#gernerate the level
 	for i in range(level_size):

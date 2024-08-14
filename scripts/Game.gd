@@ -9,8 +9,8 @@ var game_camera: GameCamera = null
 
 func _ready() -> void:
 	game_camera = camera_scene.instantiate()
-	game_camera.set_up_camera($Player)
-	add_child(game_camera)
+	game_camera.call_deferred("set_up_camera", player)#.set_up_camera($Player)
+	call_deferred("add_child", game_camera)
 	
 	if player:
 		level_generator.setup(player)
@@ -22,6 +22,5 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit(0)
 	if Input.is_action_just_pressed("reset"):
-		get_tree().reload_current_scene()
+		get_tree().call_deferred("reload_current_scene")
 	
-
