@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 @export var speed: = 300.0
+@export var accelerometer_speed: = 130.0
 @export var stop_delay: = 10
 @export var gravity: = 15.0
 @export var max_fall_velocity: = 1000.0
@@ -10,8 +11,15 @@ class_name Player
 
 
 var viewport_size
+
+var use_accelerometer: = false
+
 func _ready() -> void:
 	viewport_size = get_viewport_rect().size
+	
+	if OS.get_name() == 'Android' or OS.get_name() == 'iOS':
+		use_accelerometer = true
+	
 
 
 func _process(_delta: float) -> void:
@@ -28,12 +36,15 @@ func _physics_process(delta: float) -> void:
 	if velocity.y > max_fall_velocity:
 		velocity.y = max_fall_velocity
 	
-	
-	var direction = Input.get_axis("move_left", "move_right")
-	if direction != 0:
-		velocity.x = direction * speed
+	if use_accelerometer:
+		var mobile_input = Input.get_accelerometer()
+		velocity.x = mobile_input.x * accelerometer_speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, speed/ 10)
+		var direction = Input.get_axis("move_left", "move_right")
+		if direction != 0:
+			velocity.x = direction * speed
+		else:
+			velocity.x = move_toward(velocity.x, 0, speed/ 10)
 	
 	
 	move_and_slide()
@@ -47,3 +58,4 @@ func _physics_process(delta: float) -> void:
 
 func jump():
 	velocity.y = jump_velocity * -1
+	MyUtility.add_log_message("player_jumpeed")

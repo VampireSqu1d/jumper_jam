@@ -23,7 +23,7 @@ func _ready() -> void:
 	player_spawn_pos.y = viewport_size.y - player_spawn_pos_y_offset
 	
 	ground_sprite_2d.global_position.x = viewport_size.x * 0.5
-	ground_sprite_2d.global_position.y = viewport_size.y - player_spawn_pos_y_offset
+	ground_sprite_2d.global_position.y = viewport_size.y
 	
 	setup_parallax_layer(parallax_layer)
 	setup_parallax_layer(parallax_layer_2)

@@ -12,10 +12,14 @@ config_version=5
 
 config/name="jumper_jam"
 config/tags=PackedStringArray("2d", "gamedev.tv", "mobile")
-run/main_scene="res://scenes/Game.tscn"
+run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 run/max_fps=60
 config/icon="res://icon.svg"
+
+[autoload]
+
+MyUtility="*res://scripts/utility.gd"
 
 [display]
 
@@ -24,6 +28,11 @@ window/size/viewport_height=960
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_width"
 window/handheld/orientation=1
+
+[global_group]
+
+debug_console="this is for the log label"
+buttons=""
 
 [input]
 
@@ -63,3 +72,4 @@ pointing/emulate_touch_from_mouse=true
 [rendering]
 
 renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
