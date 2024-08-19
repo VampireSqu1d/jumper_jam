@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c4gwkgt3baqx2"]
+[gd_scene load_steps=8 format=3 uid="uid://c4gwkgt3baqx2"]
 
 [ext_resource type="Script" path="res://scripts/Game.gd" id="1_abqot"]
 [ext_resource type="PackedScene" uid="uid://b8mhp1v4btnv1" path="res://scenes/level_generator.tscn" id="3_7br67"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://q6qat31i8gte" path="res://assets/textures/bg/Layer1.png" id="4_6uf0o"]
 [ext_resource type="Texture2D" uid="uid://l6jo4tbrx5x1" path="res://assets/textures/bg/Layer2.png" id="5_77raw"]
 [ext_resource type="Texture2D" uid="uid://cdf5fg2rtkwab" path="res://assets/textures/bg/Layer3.png" id="6_8eu2t"]
+[ext_resource type="PackedScene" uid="uid://sq8qhd2fc431" path="res://scenes/hud.tscn" id="7_f5upy"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_abqot")
@@ -50,3 +51,8 @@ repeat_size = Vector2(0, 1935)
 scale = Vector2(0.875, 0.875)
 texture = ExtResource("6_8eu2t")
 centered = false
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="HUD" parent="UILayer" instance=ExtResource("7_f5upy")]

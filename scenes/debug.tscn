@@ -1,0 +1,79 @@
+[gd_scene load_steps=2 format=3 uid="uid://8exndgn1xtee"]
+
+[ext_resource type="Texture2D" uid="uid://3envagwbj0j0" path="res://assets/textures/ui/gear.png" id="1_vks6v"]
+
+[node name="Debug" type="Control"]
+z_index = 400
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ConsoleLog" type="Control" parent="." groups=["debug_console"]]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BlackBg" type="ColorRect" parent="ConsoleLog"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.666667)
+
+[node name="BuildNumberLabel" type="Label" parent="ConsoleLog"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 1.0
+offset_top = 16.0
+offset_right = 1.0
+offset_bottom = 39.0
+grow_horizontal = 2
+text = "Build 0.1.0"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ConsoleLog"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 27.0
+offset_top = 51.0
+offset_right = -27.0
+offset_bottom = -51.0
+grow_horizontal = 2
+grow_vertical = 2
+follow_focus = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ConsoleLog/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LogLabel" type="Label" parent="ConsoleLog/ScrollContainer/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_vertical = 3
+autowrap_mode = 3
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+toggle_mode = true
+texture_normal = ExtResource("1_vks6v")
+ignore_texture_size = true
+stretch_mode = 0

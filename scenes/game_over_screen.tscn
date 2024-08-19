@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://5m6whrymxlox"]
+[gd_scene load_steps=8 format=3 uid="uid://5m6whrymxlox"]
 
 [ext_resource type="Texture2D" uid="uid://bpi5c1vx2ah0y" path="res://assets/textures/ui/Box04.png" id="1_bc2po"]
+[ext_resource type="Script" path="res://scripts/base_screen.gd" id="1_l61hi"]
 [ext_resource type="Texture2D" uid="uid://bw54jpaiax37n" path="res://assets/textures/ui/Welldone.png" id="2_j0370"]
 [ext_resource type="PackedScene" uid="uid://b3ibp7g0e2la7" path="res://scenes/screen_button.tscn" id="3_jcqx2"]
 [ext_resource type="Texture2D" uid="uid://d3eaon7lt1jka" path="res://assets/textures/ui/RestartBtn.png" id="4_a8gyi"]
@@ -17,6 +18,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_l61hi")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -95,7 +97,7 @@ label_settings = SubResource("LabelSettings_pjp3y")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PauseRetry" parent="Box" instance=ExtResource("3_jcqx2")]
+[node name="GameOverRetry" parent="Box" instance=ExtResource("3_jcqx2")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -112,7 +114,7 @@ texture_normal = ExtResource("4_a8gyi")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="PauseBack" parent="Box" instance=ExtResource("3_jcqx2")]
+[node name="GameOverBack" parent="Box" instance=ExtResource("3_jcqx2")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

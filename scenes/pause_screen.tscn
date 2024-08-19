@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://fki74pd3f0xb"]
+[gd_scene load_steps=8 format=3 uid="uid://fki74pd3f0xb"]
 
+[ext_resource type="Script" path="res://scripts/base_screen.gd" id="1_anwui"]
 [ext_resource type="Texture2D" uid="uid://tft8ckaey0ey" path="res://assets/textures/ui/Box02.png" id="1_v0dkc"]
 [ext_resource type="Texture2D" uid="uid://c26mob2mgpixr" path="res://assets/textures/ui/PausedText.png" id="2_pakqt"]
 [ext_resource type="PackedScene" uid="uid://b3ibp7g0e2la7" path="res://scenes/screen_button.tscn" id="3_mhydu"]
@@ -14,6 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_anwui")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1

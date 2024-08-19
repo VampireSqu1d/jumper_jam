@@ -46,7 +46,6 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, speed/ 10)
 	
-	
 	move_and_slide()
 	
 	var margin: = 20
@@ -58,4 +57,4 @@ func _physics_process(delta: float) -> void:
 
 func jump():
 	velocity.y = jump_velocity * -1
-	MyUtility.add_log_message("player_jumpeed")
+	MyUtility.add_log_message("player_jumped")

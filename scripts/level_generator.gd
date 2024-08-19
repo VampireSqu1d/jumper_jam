@@ -23,6 +23,9 @@ func _ready() -> void:
 	generated_plaform_count = 0
 	viewport_size = get_viewport_rect().size
 	start_platform_y = viewport_size.y - (y_distance_between_plaforms * 2)
+
+
+func start_generation() -> void:
 	generate_level(start_platform_y, true)
 
 

@@ -1,5 +1,5 @@
 extends TextureButton
-
+class_name ScreenButton
 
 signal clicked(button)
 
