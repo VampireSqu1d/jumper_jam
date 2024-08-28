@@ -2,11 +2,12 @@ extends Control
 
 @onready var top_bar_bg: ColorRect = $TopBarBg
 @onready var top_bar: Control = $TopBar
+@onready var score_label: Label = $TopBar/ScoreLabel
 
 @export var margin: = 10
 
-var window_height: = 960
-var window_width: = 540
+var window_height: = 960.0
+var window_width: = 540.0
 
 func _ready() -> void:
 	var os_name = OS.get_name()
@@ -28,6 +29,10 @@ func _ready() -> void:
 		MyUtility.add_log_message("Window size: " + str(DisplayServer.window_get_size()))
 		MyUtility.add_log_message("safe area pos: " + str(safe_area_top))
 		MyUtility.add_log_message("top bar pos: " + str(top_bar.position))
+
+
+func set_score(new_score: int):
+	score_label.text = str(new_score)
 
 
 func _on_pause_button_pressed() -> void:

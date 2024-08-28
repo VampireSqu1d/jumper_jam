@@ -1,9 +1,13 @@
 extends CanvasLayer
 
+signal delete_level
+
 @onready var console_log: Control = $Debug/ConsoleLog
 @onready var title_screen: Control = $TitleScreen
 @onready var pause_screen: Control = $PauseScreen
 @onready var game_over_screen: Control = $GameOverScreen
+@onready var score_label: Label = $GameOverScreen/Box/ScoreLabel
+@onready var high_score_label: Label = $GameOverScreen/Box/HighScoreLabel
 
 var current_screen = null
 
@@ -53,9 +57,13 @@ func _on_button_pressed(button: BaseButton) -> void:
 			MyUtility.add_log_message("pause close button was pressed")
 		"GameOverRetry":
 			MyUtility.add_log_message("game over retry button was pressed")
-			change_screen(title_screen)
+			change_screen(null)
+			await get_tree().create_timer(0.5).timeout
+			start_game.emit()
 		"GameOverBack":
 			MyUtility.add_log_message("game over back button was pressed")
+			change_screen(title_screen)
+			delete_level.emit()
 	print(button.name)
 
 #endregion Buttons
@@ -70,3 +78,9 @@ func change_screen(new_screen) -> void:
 		var appear_tween = current_screen.appear()
 		await appear_tween.finished
 		get_tree().call_group("buttons", "set_disabled", false)
+
+
+func game_over(score: int, highscore: int):
+	score_label.text = "Score: " + str(score)
+	high_score_label.text = "Highscore: " + str(highscore)
+	change_screen(game_over_screen)

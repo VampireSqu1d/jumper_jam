@@ -41,7 +41,7 @@ offset_bottom = 83.0
 texture = ExtResource("1_c2kw5")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="TopBar"]
+[node name="ScoreLabel" type="Label" parent="TopBar"]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 24.0

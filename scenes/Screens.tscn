@@ -98,3 +98,5 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [connection signal="toggled" from="Debug/TextureButton" to="." method="_on_texture_button_toggled"]
+
+[editable path="GameOverScreen"]

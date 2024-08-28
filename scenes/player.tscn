@@ -137,11 +137,13 @@ script = ExtResource("1_peqr2")
 gravity = 800.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(0, -46)
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("1_wppue")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(0.5, -8)
 shape = SubResource("RectangleShape2D_e3kku")
 
@@ -150,3 +152,9 @@ unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_fhw6i")
 }
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(1.5, -9.5)
+scale = Vector2(3.15, 1.65)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

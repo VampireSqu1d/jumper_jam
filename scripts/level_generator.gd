@@ -68,3 +68,9 @@ func generate_level(start_y: float, should_generate_ground: bool = false):
 		
 		create_platform(location)
 		generated_plaform_count += 1
+
+
+func reset_level() -> void:
+	generated_plaform_count = 0
+	for platform in platform_container.get_children():
+		platform.queue_free()
