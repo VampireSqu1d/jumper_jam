@@ -42,6 +42,7 @@ func _on_texture_button_toggled(toggled_on: bool) -> void:
 
 
 func _on_button_pressed(button: BaseButton) -> void:
+	SoundFx.play("click")
 	match button.name:
 		"PlayButton":
 			MyUtility.add_log_message("play button was pressed")
@@ -50,11 +51,19 @@ func _on_button_pressed(button: BaseButton) -> void:
 			start_game.emit()
 		"PauseRetry":
 			MyUtility.add_log_message("pause retry button was pressed")
-			change_screen(game_over_screen)
+			change_screen(null)
+			await get_tree().create_timer(0.5).timeout
+			get_tree().paused = false
+			start_game.emit()
 		"PauseBack":
 			MyUtility.add_log_message("pause back button was pressed")
+			get_tree().paused = false
+			delete_level.emit()
 		"PauseClose":
 			MyUtility.add_log_message("pause close button was pressed")
+			change_screen(null)
+			await get_tree().create_timer(0.75).timeout
+			get_tree().paused = false
 		"GameOverRetry":
 			MyUtility.add_log_message("game over retry button was pressed")
 			change_screen(null)
@@ -84,3 +93,7 @@ func game_over(score: int, highscore: int):
 	score_label.text = "Score: " + str(score)
 	high_score_label.text = "Highscore: " + str(highscore)
 	change_screen(game_over_screen)
+
+
+func pause_game() -> void:
+	change_screen(pause_screen)

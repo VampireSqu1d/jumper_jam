@@ -1,6 +1,7 @@
 extends Node2D
 
 signal player_died(score, highscore)
+signal pause_game
 
 @export var player_spawn_pos_y_offset = 135
 @onready var ground_sprite_2d: Sprite2D = $GroundSprite2D
@@ -38,9 +39,25 @@ func _ready() -> void:
 	setup_parallax_layer(parallax_layer)
 	setup_parallax_layer(parallax_layer_2)
 	setup_parallax_layer(parallax_layer_3)
+	
+	hud.pause_game.connect(_on_hud_pause_game)
 	hud.visible = false
 	hud.set_score(0)
 
+
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("quit"):
+		get_tree().quit(0)
+	if Input.is_action_just_pressed("reset"):
+		get_tree().call_deferred("reload_current_scene")
+	
+	if player:
+		if score < int(viewport_size.y - player.global_position.y):
+			score = int(viewport_size.y - player.global_position.y)
+			hud.set_score(score)
+
+
+#region parallax bg
 
 func get_parallax_sprite_scale(sprite: Sprite2D) -> Vector2:
 	var parallax_texture = sprite.get_texture()
@@ -56,18 +73,9 @@ func setup_parallax_layer(layer: Parallax2D) ->  void:
 		var my = sprite.scale.y * sprite.get_texture().get_height()
 		layer.repeat_size.y = my
 
+#endregion parallax bg
 
-func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("quit"):
-		get_tree().quit(0)
-	if Input.is_action_just_pressed("reset"):
-		get_tree().call_deferred("reload_current_scene")
-	
-	if player:
-		if score < int(viewport_size.y - player.global_position.y):
-			score = int(viewport_size.y - player.global_position.y)
-			hud.set_score(score)
-
+#region new game/ reset game
 
 func new_game() -> void:
 	reset_game()
@@ -88,6 +96,19 @@ func new_game() -> void:
 		level_generator.start_generation()
 
 
+func reset_game() -> void:
+	level_generator.reset_level()
+	hud.set_score(0)
+	hud.visible = false
+	if player:
+		player.queue_free()
+		player = null
+		level_generator.player = null
+	if game_camera:
+		game_camera.queue_free()
+		game_camera = null
+
+
 func _on_player_died() -> void:
 	hud.visible = false
 	
@@ -98,18 +119,9 @@ func _on_player_died() -> void:
 		
 	player_died.emit(score, highscore)
 
+#endregion new game/ reset game
 
-func reset_game() -> void:
-	level_generator.reset_level()
-	hud.set_score(0)
-	if player:
-		player.queue_free()
-		player = null
-		level_generator.player = null
-	if game_camera:
-		game_camera.queue_free()
-		game_camera = null
-
+#region saving/ loading scores
 
 func save_highscore(score_to_save) -> void:
 	var file = FileAccess.open(safe_file_path, FileAccess.WRITE)
@@ -118,7 +130,7 @@ func save_highscore(score_to_save) -> void:
 	file.close()
 
 
-func load_score():
+func load_score() -> void:
 	if FileAccess.file_exists(safe_file_path):
 		var file = FileAccess.open(safe_file_path, FileAccess.READ)
 		highscore = file.get_var()
@@ -127,3 +139,10 @@ func load_score():
 	else:
 		MyUtility.add_log_message("no highscore save file found")
 		highscore = 0
+
+#endregion saving/ loading scores
+
+
+func _on_hud_pause_game() -> void:
+	pause_game.emit()
+	

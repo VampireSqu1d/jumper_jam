@@ -1,5 +1,7 @@
 extends Control
 
+signal pause_game
+
 @onready var top_bar_bg: ColorRect = $TopBarBg
 @onready var top_bar: Control = $TopBar
 @onready var score_label: Label = $TopBar/ScoreLabel
@@ -36,4 +38,5 @@ func set_score(new_score: int):
 
 
 func _on_pause_button_pressed() -> void:
-	pass # Replace with function body.
+	SoundFx.play("click")
+	pause_game.emit()#get_tree().paused = !get_tree().paused
