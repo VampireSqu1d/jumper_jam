@@ -1,6 +1,9 @@
 extends CanvasLayer
 
 signal delete_level
+signal start_game
+signal purchase_skin
+
 
 @onready var console_log: Control = $Debug/ConsoleLog
 @onready var title_screen: Control = $TitleScreen
@@ -8,10 +11,11 @@ signal delete_level
 @onready var game_over_screen: Control = $GameOverScreen
 @onready var score_label: Label = $GameOverScreen/Box/ScoreLabel
 @onready var high_score_label: Label = $GameOverScreen/Box/HighScoreLabel
+@onready var shop_screen: Control = $ShopScreen
 
 var current_screen = null
 
-signal start_game
+
 
 func _ready() -> void:
 	console_log.visible = false
@@ -49,6 +53,9 @@ func _on_button_pressed(button: BaseButton) -> void:
 			change_screen(null)
 			await get_tree().create_timer(0.5).timeout
 			start_game.emit()
+		"TitleShop":
+			MyUtility.add_log_message("Shop button was pressed")
+			change_screen(shop_screen)
 		"PauseRetry":
 			MyUtility.add_log_message("pause retry button was pressed")
 			change_screen(null)
@@ -73,6 +80,11 @@ func _on_button_pressed(button: BaseButton) -> void:
 			MyUtility.add_log_message("game over back button was pressed")
 			change_screen(title_screen)
 			delete_level.emit()
+		"ShopBack":
+			MyUtility.add_log_message("shop back button was pressed")
+			change_screen(title_screen)
+		"ShopPurchaseSkin":
+			purchase_skin.emit()
 	print(button.name)
 
 #endregion Buttons

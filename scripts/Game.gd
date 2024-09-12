@@ -25,6 +25,10 @@ var score: int = 0
 var highscore: int = 0
 var safe_file_path = "user://highscore.save"
 
+
+var new_skin_unlocked: = false
+
+
 func _ready() -> void:
 	load_score()
 	viewport_size = get_viewport_rect().size
@@ -91,9 +95,13 @@ func new_game() -> void:
 	game_camera.call_deferred("set_up_camera", player)#.set_up_camera($Player)
 	call_deferred("add_child", game_camera)
 	
+	
 	if player:
 		level_generator.setup(player)
 		level_generator.start_generation()
+		
+		if new_skin_unlocked:
+			player.use_new_skin()
 
 
 func reset_game() -> void:

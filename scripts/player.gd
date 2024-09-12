@@ -9,13 +9,18 @@ signal died
 @export var gravity: = 15.0
 @export var max_fall_velocity: = 1000.0
 @export var jump_velocity: = 800.0
+
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var collision_shape_2d: CollisionShape2D = %CollisionShape2D
+@onready var sprite_2d: Sprite2D = %Sprite2D
 
 var dead: = false
 var viewport_size
 
 var use_accelerometer: = false
+
+var fall_anim_name: = "fall"
+var jump_anim_name: = "jump"
 
 func _ready() -> void:
 	viewport_size = get_viewport_rect().size
@@ -23,15 +28,17 @@ func _ready() -> void:
 	if OS.get_name() == 'Android' or OS.get_name() == 'iOS':
 		use_accelerometer = true
 	
+	
+
 
 
 func _process(_delta: float) -> void:
 	if velocity.y > 0:
-		if animation_player.current_animation != "fall":
-			animation_player.play("fall")
+		if animation_player.current_animation != fall_anim_name:
+			animation_player.play(fall_anim_name)
 	else:
-		if animation_player.current_animation != "jump":
-			animation_player.play("jump")
+		if animation_player.current_animation != jump_anim_name:
+			animation_player.play(jump_anim_name)
 
 
 func _physics_process(delta: float) -> void:
@@ -75,3 +82,12 @@ func die():
 		SoundFx.play("fall")
 		died.emit()
 		dead = true
+
+
+func use_new_skin() -> void:
+	fall_anim_name = "fall_red"
+	jump_anim_name = "jump_red"
+	
+	if sprite_2d:
+		sprite_2d.texture = preload("res://assets/textures/character/Skin2Idle.png")
+	
